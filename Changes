@@ -1,0 +1,8 @@
+Changes
+=======
+
+0.99999 - 16 Aug 2007
+  - Rename from Catalyst::Model::FormFu to Catalyst::Model::HTML::FormFu
+  - Fix cache stuff
+  - Update docs, include config_dir
+  - Add Catalyst tests

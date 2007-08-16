@@ -1,0 +1,132 @@
+NAME
+    Catalyst::Model::HTML::FormFu - FormFu In Your Model
+
+SYNOPSIS
+      # Install formfu elements
+      # (See perldoc Catalyst::Helper::Model::HTML::FormFu)
+      ./script/myapp_create.pl model YourModelName FormFu [dirname]
+
+      # In your app
+      MyApp->config(
+        'Model::HTML::FormFu' => {
+          cache_backend   => 'formfu', # optional
+          config_dir      => '/path/to/basedir/', # optional
+          contructor_args => { ... },  # optional
+          stash_key       => 'form',   # optional
+        }
+      );
+
+      # in your controller
+      sub foo : Local
+      {
+         my ($self, $c) = @_;
+         $c->model('FormFu')->load_form('path/to/file.yml');
+      }
+
+DESCRIPTION
+    Catalyst::Model::HTML::FormFu allows you to use HTML::FormFu from your
+    Catalyst model, fully with caching and support for inserting dynamic
+    values.
+
+STASH KEY
+    When a form is loaded via load_form(), you can automatically tell
+    Catalyst::Model::HTML::FormFu to populate a stash key, so you can
+    immediately use it in your template.
+
+    Just specify the stash_key config parameter:
+
+      MyApp->config(
+        'Model::HTML::FormFu' => {
+           stash_key => 'form'
+        }
+      );
+
+    In your controller, just load the form:
+
+      sub foo : Local {
+        my($self, $c) = @_;
+        my $form = $c->model('FormFu')->load_form('path/to/form.yml');
+        if ($form->submitted_and_valid) {
+           ...
+        }
+      }
+
+    Then you can simply say in your template:
+
+      [% form %]
+
+DYNAMIC VALUES
+    If you use the following construct anywhere in your config, the values
+    will be replaced by dyamic values:
+
+      - type: text
+        value: __dynamic(method_name)__
+
+    The value will be replaced by the return value from calling
+    $model->method_name($c)
+
+    For example, if you want to pull out values from the database and put
+    them in a select field:
+
+      # config
+      - type: select
+        options: __dynamic(select_from_db)__
+
+      # MyApp::Model::HTML::FormFu
+      sub select_from_db {
+        my ($self, $c) = @_;
+        my @values = $c->model('DBIC')->resultset('SelectValues')->all;
+        # munge @values so that it conforms to HTML::FormFu's spec
+        ....
+
+        return \@values;
+      }
+
+CONFIG DIR
+    You can configure which directory the model looks for config files.
+    simply specify the 'config_dir' key in your config
+
+      MyApp->config(
+        'Model::HTML::FormFu' => {
+          config_dir => '/path/to/basedir'
+        }
+      )
+
+    If unspecified, it will look under $c->path_to('root')
+
+CACHE
+    FormFu objects will be used many times through the life cycle of your
+    Catalyst application and since forms don't change, caching an already
+    constructed form will make your forms much faster.
+
+    Caching is done through Catalyst::Plugin::Cache. Setup one, and
+    Catalyst::Model::HTML::FormFu will use default cache backend. If you
+    create multiple cache backends and want to use a particular one of
+    those, specify it in the config:
+
+      MyApp->config(
+        'Model::HTML::FormFu' => {
+          cache_backend => 'formfu'
+        }
+      )
+
+METHODS
+  load_form($config)
+    Loads HTML::FormFu from config. $config can either be the path to the
+    config file, or a hash that contains the config.
+
+  cache($c)
+    Loads the appropriate cache object. This defaults to the cache object
+    setup by Catalyst::Plugin::Cache, with the name specified in
+    MyApp->config->{Model::HTML::FormFu}->{cache_backend}
+
+  ACCEPT_CONTEXT
+AUTHOR
+    2007 Copyright (c) Daisuke Maki "daisuke@endeworks.jp"
+
+LICENSE
+    This program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
+    See http://www.perl.com/perl/misc/Artistic.html
+
