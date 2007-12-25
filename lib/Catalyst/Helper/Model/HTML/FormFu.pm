@@ -49,7 +49,7 @@ Catalyst::Helper::Model::HTML::FormFu - Helper to deploy HTML::FormFu template f
 
 =head1 SYNOPSIS
 
-    script/myapp_create.pl model YouModelName FormFu [dirname]
+    script/myapp_create.pl model YouModelName HTML::FormFu [dirname]
 
 =head1 DESCRIPTION
 
@@ -62,7 +62,7 @@ created with the C<root> directory
 The following example would deploy the template files into directory 
 C<root/forms>.
 
-    script/myapp_create.pl model YourModelName FormFu forms
+    script/myapp_create.pl model YourModelName HTML::FormFu forms
 
 =head1 METHODS
 

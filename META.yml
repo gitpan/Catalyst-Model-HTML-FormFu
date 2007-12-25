@@ -1,8 +1,12 @@
 --- 
 abstract: FormFu In Your Model
-author: 2007 Copyright (c) Daisuke Maki C<daisuke@endeworks.jp>
+author: 
+  - 2007 Copyright (c) Daisuke Maki C<daisuke@endeworks.jp>
+build_requires: 
+  Catalyst::Test: 0
+  Test::More: 0
 distribution_type: module
-generated_by: Module::Install version 0.67
+generated_by: Module::Install version 0.68
 license: perl
 meta-spec: 
   url: http://module-build.sourceforge.net/META-spec-v1.3.html
@@ -19,5 +23,5 @@ requires:
   Data::Dumper: 0
   Data::Visitor::Callback: 0
   Digest::MD5: 0
-  HTML-FormFu: 0
-version: 0.99999
+  HTML::FormFu: 0.02000
+version: 1.00000

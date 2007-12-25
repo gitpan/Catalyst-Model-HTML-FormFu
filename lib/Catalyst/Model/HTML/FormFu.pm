@@ -1,4 +1,4 @@
-# $Id: FormFu.pm 119 2007-08-16 02:46:13Z daisuke $
+# $Id: /mirror/perl/Catalyst-Model-HTML-FormFu/trunk/lib/Catalyst/Model/HTML/FormFu.pm 36884 2007-12-25T06:25:05.268411Z daisuke  $
 #
 # Copyright (c) 2007 Daisuke Maki <daisuke@endeworks.jp>
 
@@ -6,7 +6,7 @@ package Catalyst::Model::HTML::FormFu;
 use strict;
 use warnings;
 use base qw(Catalyst::Model);
-our $VERSION = '0.99999';
+our $VERSION = '1.00000';
 use Class::C3;
 use Config::Any;
 use Data::Visitor::Callback;
@@ -144,8 +144,8 @@ sub _construct_formfu
 
     my $constructor_args = $self->constructor_args || {};
     $constructor_args->{query_type} = 'Catalyst';
-    $constructor_args->{render_class_args} ||= {};
-    $constructor_args->{render_class_args}->{INCLUDE_PATH} ||= $c->path_to('root', 'formfu')->stringify;
+    $constructor_args->{tt_args} ||= {};
+    $constructor_args->{tt_args}->{INCLUDE_PATH} ||= $c->path_to('root', 'formfu')->stringify;
 
     my $form = HTML::FormFu->new($constructor_args);
     $form->populate($config);
