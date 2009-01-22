@@ -1,6 +1,8 @@
 Changes
 =======
 
+Deprecated
+
 1.00000_01 - 25 Dec 2007
   - Rename render_class_args to tt_args
   - Use proper type case

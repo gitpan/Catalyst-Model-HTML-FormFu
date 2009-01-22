@@ -1,6 +1,18 @@
 use strict;
 use inc::Module::Install;
 
+print <<EOM;
+
+
+***** WARNING ******
+This module has been DEPRECATED.
+
+Please consider moving to Catalyst::Controller::HTML::FormFu instead
+********************
+
+
+EOM
+
 name 'Catalyst-Model-HTML-FormFu';
 all_from 'lib/Catalyst/Model/HTML/FormFu.pm';
 

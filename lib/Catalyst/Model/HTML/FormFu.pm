@@ -6,7 +6,7 @@ package Catalyst::Model::HTML::FormFu;
 use strict;
 use warnings;
 use base qw(Catalyst::Model);
-our $VERSION = '1.00000';
+our $VERSION = '1.00001';
 use Class::C3;
 use Config::Any;
 use Data::Visitor::Callback;
@@ -182,7 +182,7 @@ __END__
 
 =head1 NAME
 
-Catalyst::Model::HTML::FormFu - FormFu In Your Model
+Catalyst::Model::HTML::FormFu - FormFu In Your Model (Deprecated)
 
 =head1 SYNOPSIS
 
@@ -208,6 +208,11 @@ Catalyst::Model::HTML::FormFu - FormFu In Your Model
   }
 
 =head1 DESCRIPTION
+
+  *** WARNING ***
+  This module has been deprecated.
+  Please consider using Catalyst::Controller::HTML::FormFu instead.
+  ***************
 
 Catalyst::Model::HTML::FormFu allows you to use HTML::FormFu from your Catalyst
 model, fully with caching and support for inserting dynamic values.
